@@ -1,3 +1,4 @@
+using Mediator.App.Handlers;
 using Mediator.App.Models;
 using Mediator.App.Repositories;
 using MediatR;
@@ -27,6 +28,8 @@ namespace Mediator.App
 
             services.AddScoped<IRepository<Produto>, ProdutoRepository>();
             services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 
             services.AddSwaggerGen(c =>
             {
